@@ -1,0 +1,93 @@
+:host {
+    display: block;
+    padding: 20px 12px;
+    background: var(--dark-color);
+    position: relative;
+}
+
+.main-menu-list {
+    display: grid;
+    grid-gap: 8px;
+}
+
+.menu-item {
+    padding: 16px 12px;
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--light-color);
+    width: 100%;
+    display: grid;
+    grid-template-columns: 16px 1fr max-content;
+    align-items: center;
+    border-radius: 2px;
+    grid-gap: 12px;
+    font-size: 14px;
+    line-height: 24px;
+    text-align: left;
+    font-family: 'JetBrains Mono';
+
+    &:hover,
+    &:focus-visible {
+        background: var(--dark-hover-color);
+        color: var(--primary-color);
+
+        .menu-item svg {
+            color: var(--primary-color);
+        }
+    }
+}
+
+.menu-item svg {
+    width: 16px;
+    height: 16px;
+}
+
+.to-subscribers-link {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    width: min-content;
+    color: var(--primary-color);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.to-subscribers-icon {
+    width: 11px;
+    height: 16px;
+}
+
+.sidebar__footer {
+    position: absolute;
+    bottom: 20px;
+    width: calc(100% - 25px);
+    background: var(--dark-color);
+    border-radius: 2px;
+    padding: 6px 16px;
+    display: grid;
+    grid-template-columns: 32px 1fr 13px;
+    grid-gap: 12px;
+    align-items: center;
+
+    img {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+    }
+
+    .username-text {
+        font-family: 'JetBrains Mono Bold';
+        color: var(--primary-color);
+    }
+}
+
+.settings-btn {
+    width: 13px;
+    height: 13px;
+
+    svg {
+        width: 14px;
+        height: 18px;
+        color: var(--primary-color);
+    }
+}
