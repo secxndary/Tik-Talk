@@ -1,0 +1,11 @@
+<div class="profile-card__wrapper">
+        
+    <!-- <div>profiles should be here...</div> -->
+    
+    @for (profile of profiles; track profile.id) {
+        <app-profile-card 
+            [profile]="profile"
+        >
+        </app-profile-card>
+    }        
+</div>
