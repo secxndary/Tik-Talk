@@ -9,7 +9,7 @@ import { SettingsPageComponent } from './pages/settings-page/settings-page.compo
 export const routes: Routes = [
     {
         path: '', component: LayoutComponent, children: [
-            { path: '', component: SearchPageComponent },
+            { path: 'search', component: SearchPageComponent },
             { path: 'profile/:id', component: ProfilePageComponent },
             { path: 'settings', component: SettingsPageComponent },
         ],

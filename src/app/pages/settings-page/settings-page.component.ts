@@ -17,6 +17,7 @@ export class SettingsPageComponent {
     profileService = inject(ProfileService);
 
     constructor() {
+        // effect запускает коллбек каждый раз, когда меняется signal
         effect(() => {
             this.form.patchValue({
                 ...this.profileService.me(),
