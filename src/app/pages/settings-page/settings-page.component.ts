@@ -66,18 +66,25 @@ export class SettingsPageComponent {
             return [];
 
         if (Array.isArray(stack))
-            return stack;
+            return this.trimStartAndEndOfStringArray(stack);
 
-        return stack.split(',');
+        return this.trimStartAndEndOfStringArray(
+            stack.split(',')
+        );
     }
 
-    mergeStack(stack: string | null | string[] | undefined) {
+    mergeStack(stack: string | null | string[] | undefined) : string {
         if (!stack)
             return '';
 
         if (Array.isArray(stack))
-            return stack.join(',');
+            return this.trimStartAndEndOfStringArray(stack)
+                    .join(',');
 
         return stack;
+    }
+
+    trimStartAndEndOfStringArray(arr: string[]) : string[] {
+        return arr.map(elem => elem.trimStart().trimEnd());
     }
 }
