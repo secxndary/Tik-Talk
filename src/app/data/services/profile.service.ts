@@ -12,15 +12,13 @@ export class ProfileService {
 
     baseApiUrl = 'https://icherniakov.ru/yt-course';
 
-    // зачем нужен сигнал?
     me = signal<Profile | null>(null);
+    filteredProfiles = signal<Profile[]>([]);
 
-    // почему здесь мы просто загоянем в переменную?
     getTestAccounts() {
         return this.http.get<Profile[]>(`${this.baseApiUrl}/account/test_accounts`);
     }
 
-    // а здесь получаем поток и загоняем в переменную через pipe? это из-за присования this.me?
     getMe() {
         return this.http.get<Profile>(`${this.baseApiUrl}/account/me`)
             .pipe(
@@ -55,6 +53,15 @@ export class ProfileService {
         return this.http.post<Profile>(
             `${this.baseApiUrl}/account/upload_image`,
             fd
+        );
+    }
+
+    filterProfiles(params: Record<string, any>) {
+        return this.http.get<Pagable<Profile>>(
+            `${this.baseApiUrl}/account/accounts`,
+            { params }
+        ).pipe(
+            tap(res => this.filteredProfiles.set(res.items))
         );
     }
 }
