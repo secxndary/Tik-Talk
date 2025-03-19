@@ -6,6 +6,7 @@
     --dark-color: #000000;
     --dark-hover-color: #161616;
     --gray-color: #5F646D;
+    --dark-gray-color: #0A0A0A;
     --light-color: #FFFFFF;
     --light-transparent-color: rgba(255, 255, 255, 0.75);
     --primary-color: #AE7AFF;
@@ -104,7 +105,7 @@ body {
 }
 
 .regular {
-    font-style: 14px;
+    font-size: 14px;
     font-weight: 400;
     line-height: 20px;
 }

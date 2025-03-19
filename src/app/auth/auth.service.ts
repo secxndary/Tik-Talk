@@ -44,9 +44,8 @@ export class AuthService {
 
     refreshAuthToken() {
         return this.http.post<TokenResponse>(
-            `${this.baseApiUrl}/refresh`, {
-            refresh_token: this.refreshToken
-        }
+            `${this.baseApiUrl}/refresh`, 
+            { refresh_token: this.refreshToken }
         ).pipe(
             tap(val => this.saveTokens(val)),
 
@@ -54,7 +53,7 @@ export class AuthService {
                 this.logout();
                 return throwError(err);
             })
-        )
+        );
     }
 
     logout() {
