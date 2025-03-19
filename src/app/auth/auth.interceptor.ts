@@ -1,22 +1,22 @@
 import { HttpHandlerFn, HttpInterceptorFn, HttpRequest } from "@angular/common/http";
 import { AuthService } from "./auth.service";
 import { inject } from "@angular/core";
-import { catchError, switchMap, throwError } from "rxjs";
+import { BehaviorSubject, catchError, filter, switchMap, tap, throwError } from "rxjs";
 
-let isRefreshing = false;
+// BehaviorSubject – это гибрид между stream и signal
+// Можно как подписаться на него, так и в любой момент без подписки получить его значение
+let isRefreshing$ = new BehaviorSubject<boolean>(false);
 
 export const authTokenInterceptor: HttpInterceptorFn = (req, next) => {
     const authService = inject(AuthService);
 
     const accessToken = authService.accessToken;
-    
+
     if (!accessToken)
         return next(req);
 
-    if (isRefreshing)
+    if (isRefreshing$.value)
         return refreshAndProceed(authService, req, next);
-
-    getRequestWithAddedToken(req, accessToken);
 
     return next(getRequestWithAddedToken(req, accessToken))
         .pipe(
@@ -31,21 +31,34 @@ export const authTokenInterceptor: HttpInterceptorFn = (req, next) => {
 }
 
 const refreshAndProceed = (authService: AuthService, req: HttpRequest<any>, next: HttpHandlerFn) => {
-    if (isRefreshing) {
-        return next(getRequestWithAddedToken(req, authService.accessToken!));
+    if (!isRefreshing$.value) {
+        isRefreshing$.next(true);
+
+        return authService.refreshAuthToken()
+            .pipe(
+                // переключаемся на другой поток
+                switchMap(res => {
+                    return next(getRequestWithAddedToken(req, res.access_token))
+                        .pipe(
+                            tap(() => isRefreshing$.next(false))
+                        );
+                })
+            );
     }
 
-    isRefreshing = true;
+    // сам запрос на /refresh пропускаем через next()
+    if (req.url.includes('refresh'))
+        return next(getRequestWithAddedToken(req, authService.accessToken!));
 
-    return authService.refreshAuthToken()
-        .pipe(
-            // переключаемся на другой поток
-            switchMap((res) => {
-                isRefreshing = false;
+    return isRefreshing$.pipe(
+        // подписываемся на isRefreshing$ и ждём, пока он станет false (через filter),
+        // т.е. refresh закончится, и только после этого отправляем повторный запрос
+        filter(isRefreshing => !isRefreshing),
+        switchMap(res => {
+            return next(getRequestWithAddedToken(req, authService.accessToken!));
+        })
+    );
 
-                return next(getRequestWithAddedToken(req, res.access_token));
-            })
-        )
 }
 
 const getRequestWithAddedToken = (req: HttpRequest<any>, accessToken: string) : HttpRequest<any>=> {
