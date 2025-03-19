@@ -47,4 +47,14 @@ export class ProfileService {
             profile
         );
     }
+
+    uploadAvatar(avatarFile: File) {
+        const fd = new FormData();
+        fd.append('image', avatarFile);
+
+        return this.http.post<Profile>(
+            `${this.baseApiUrl}/account/upload_image`,
+            fd
+        );
+    }
 }
