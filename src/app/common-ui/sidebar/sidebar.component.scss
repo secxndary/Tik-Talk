@@ -26,6 +26,7 @@
     text-align: left;
     font-family: 'JetBrains Mono';
 
+    &.active,
     &:hover,
     &:focus-visible {
         background: var(--dark-hover-color);
@@ -82,12 +83,12 @@
 }
 
 .settings-btn {
-    width: 13px;
-    height: 13px;
+    width: 15px;
+    height: 16px;
 
     svg {
-        width: 14px;
-        height: 18px;
+        width: 15px;
+        height: 16px;
         color: var(--primary-color);
     }
 }

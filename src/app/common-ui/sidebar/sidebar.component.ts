@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { SvgIconComponent } from '../svg-icon/svg-icon.component';
 import { AsyncPipe, NgForOf } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { ProfileService } from '../../data/services/profile.service';
 import { SubscriberCardComponent } from "./subscriber-card/subscriber-card.component";
 import { firstValueFrom } from 'rxjs';
@@ -10,12 +10,13 @@ import { ImgUrlPipe } from "../../helpers/pipes/img-url.pipe";
 @Component({
     selector: 'app-sidebar',
     imports: [
-    SvgIconComponent,
-    NgForOf,
-    RouterLink,
-    AsyncPipe,
-    SubscriberCardComponent,
-    ImgUrlPipe
+        SvgIconComponent,
+        NgForOf,
+        RouterLink,
+        AsyncPipe,
+        SubscriberCardComponent,
+        ImgUrlPipe,
+        RouterLinkActive
 ],
     templateUrl: './sidebar.component.html',
     styleUrl: './sidebar.component.scss'
@@ -23,7 +24,7 @@ import { ImgUrlPipe } from "../../helpers/pipes/img-url.pipe";
 export class SidebarComponent {
     profileService = inject(ProfileService);
 
-    subscribersAmount = 3;
+    subscribersAmount = 5;
     subscribers$ = this.profileService.getSubscribersShortList(this.subscribersAmount);
 
     me = this.profileService.me;
@@ -48,8 +49,5 @@ export class SidebarComponent {
 
     ngOnInit() {
         firstValueFrom(this.profileService.getMe());
-        setTimeout(() => {
-            console.log(this.me)
-        }, 3000);
     }
 }
