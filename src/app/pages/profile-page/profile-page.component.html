@@ -3,10 +3,13 @@
         <app-profile-header 
             [profile]="profile">
         </app-profile-header>
-        <a class="btn to-settings-btn" [routerLink]="['/settings']">
-            Редактировать
-            <svg icon="settings" class="to-settings-icon"></svg>
-        </a>
+
+        @if (profile.id === (me$ | async)?.id) {
+            <a class="btn to-settings-btn" [routerLink]="['/settings']">
+                Редактировать
+                <svg icon="settings" class="to-settings-icon"></svg>
+            </a>
+        }
     </header>
 
 
@@ -35,8 +38,14 @@
             <div class="skills-wrapper mb32">
                 <h3 class="h6 mb16">Навыки</h3>
                 <div class="skills-list-wrapper">
-                    @for (skill of profile.stack; track skill) 
-                    {   
+                    @if (profile.stack.length === 0) {
+                        <a [routerLink]="['/settings']" class="tt-link-primary">
+                            <p class="medium-text">Добавить навыки</p>
+                        </a>
+                    }
+
+                    @for (skill of profile.stack; track skill)
+                    {
                         <div class="skill-tag">{{ skill }}</div>
                     }
                 </div>
@@ -44,6 +53,12 @@
 
             <div class="description-wrapper">
                 <h3 class="h6 mb16">О себе</h3>
+                @if (profile.description.length === 0) {
+                    <a [routerLink]="['/settings']" class="tt-link-primary">
+                        <p class="medium-text">Добавить раздел "О себе"</p>
+                    </a>
+                }
+
                 <p class="medium-text">{{ profile.description }}</p>
             </div>
         </div>

@@ -1,7 +1,8 @@
 <img 
-    class="subscriber-avatar"
+    class="subscriber-avatar tt-link"
     [src]="profile.avatarUrl | imgUrl" 
     [alt]="profile.lastName"
+    [routerLink]="['/profile', profile.id]"
 >
 
-<strong class="subtitle">{{ profile.firstName }} {{ profile.lastName }}</strong>
+<strong class="subtitle tt-link" [routerLink]="['/profile', profile.id]">{{ profile.firstName }} {{ profile.lastName }}</strong>
