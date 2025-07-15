@@ -12,13 +12,13 @@ import { PostFeedComponent } from "./post-feed/post-feed.component";
 @Component({
     selector: 'app-profile-page',
     imports: [
-    RouterLink,
-    AsyncPipe,
-    ImgUrlPipe,
-    ProfileHeaderComponent,
-    SvgIconComponent,
-    PostFeedComponent
-],
+        RouterLink,
+        AsyncPipe,
+        ImgUrlPipe,
+        ProfileHeaderComponent,
+        SvgIconComponent,
+        PostFeedComponent
+    ],
     templateUrl: './profile-page.component.html',
     styleUrl: './profile-page.component.scss'
 })

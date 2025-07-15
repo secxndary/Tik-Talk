@@ -25,7 +25,7 @@ export const authTokenInterceptor: HttpInterceptorFn = (req, next) => {
                     return refreshAndProceed(authService, req, next);
                 }
 
-                return throwError(error);
+                return throwError(() => error);
             })
         );
 }
