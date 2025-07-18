@@ -11,34 +11,35 @@ export class ProfileService {
     http = inject(HttpClient);
 
     baseApiUrl = 'https://icherniakov.ru/yt-course';
+    accountApiUrl = `${this.baseApiUrl}/account`;
 
     me = signal<Profile | null>(null);
     filteredProfiles = signal<Profile[]>([]);
 
     getTestAccounts() {
-        return this.http.get<Profile[]>(`${this.baseApiUrl}/account/test_accounts`);
+        return this.http.get<Profile[]>(`${this.accountApiUrl}/test_accounts`);
     }
 
     getTestSubscribers() {
-        return this.http.get<Pagable<Profile[]>>(`${this.baseApiUrl}/account/subscribers/`);
+        return this.http.get<Pagable<Profile[]>>(`${this.accountApiUrl}/subscribers/`);
     }
 
     getTestSubscribersShortList(subscribersShowingAmount: number = 6) {
-        return this.http.get<Pagable<Profile>>(`${this.baseApiUrl}/account/subscribers/`)
+        return this.http.get<Pagable<Profile>>(`${this.accountApiUrl}/subscribers/`)
             .pipe(
                 map(val => val.items = this.getShortList(val.items, subscribersShowingAmount))
             );
     }
 
     getMe() {
-        return this.http.get<Profile>(`${this.baseApiUrl}/account/me`)
+        return this.http.get<Profile>(`${this.accountApiUrl}/me`)
             .pipe(
                 tap(val => this.me.set(val))
             );
     }
 
     getAccount(accountId: number) {
-        return this.http.get<Profile>(`${this.baseApiUrl}/account/${accountId}`);
+        return this.http.get<Profile>(`${this.accountApiUrl}/${accountId}`);
     }
 
     getSubscribersShortList(
@@ -51,7 +52,7 @@ export class ProfileService {
 
         return this.getRandomPageNumber(accountId).pipe(
             switchMap(randomPageNumber => {
-                return this.http.get<Pagable<Profile>>(`${this.baseApiUrl}/account/subscribers/${accountId}?page=${randomPageNumber}`)
+                return this.http.get<Pagable<Profile>>(`${this.accountApiUrl}/subscribers/${accountId}?page=${randomPageNumber}`)
                     .pipe(map(val => {
                         let subscribers = [...val.items];
 
@@ -68,12 +69,12 @@ export class ProfileService {
     }
 
     getAllSubscribers(accountId: number | undefined) {
-        return this.http.get<Pagable<Profile[]>>(`${this.baseApiUrl}/account/subscribers/${accountId}`);
+        return this.http.get<Pagable<Profile[]>>(`${this.accountApiUrl}/subscribers/${accountId}`);
     }
 
     patchProfile(profile: Partial<Profile>) {
         return this.http.patch<Profile>(
-            `${this.baseApiUrl}/account/me`, 
+            `${this.accountApiUrl}/me`, 
             profile
         );
     }
@@ -83,14 +84,14 @@ export class ProfileService {
         fd.append('image', avatarFile);
 
         return this.http.post<Profile>(
-            `${this.baseApiUrl}/account/upload_image`,
+            `${this.accountApiUrl}/upload_image`,
             fd
         );
     }
 
     filterProfiles(params: Record<string, any>) {
         return this.http.get<Pagable<Profile>>(
-            `${this.baseApiUrl}/account/accounts`,
+            `${this.accountApiUrl}/accounts`,
             { params }
         ).pipe(
             tap(res => this.filteredProfiles.set(res.items))
@@ -98,7 +99,7 @@ export class ProfileService {
     }
 
     getRandomPageNumber(accountId: number) {
-        return this.http.get<Pagable<Profile>>(`${this.baseApiUrl}/account/subscribers/${accountId}`)
+        return this.http.get<Pagable<Profile>>(`${this.accountApiUrl}/subscribers/${accountId}`)
             .pipe(
                 map(val => this.getRandomNumberFromInterval(1, val.pages))
             );
