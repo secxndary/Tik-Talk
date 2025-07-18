@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { Profile } from '../interfaces/profile.interface';
 import { Pagable } from '../interfaces/pagable.interface';
-import { map, tap } from 'rxjs';
+import { map, of, switchMap, tap } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -19,6 +19,17 @@ export class ProfileService {
         return this.http.get<Profile[]>(`${this.baseApiUrl}/account/test_accounts`);
     }
 
+    getTestSubscribers() {
+        return this.http.get<Pagable<Profile[]>>(`${this.baseApiUrl}/account/subscribers/`);
+    }
+
+    getTestSubscribersShortList(subscribersShowingAmount: number = 6) {
+        return this.http.get<Pagable<Profile>>(`${this.baseApiUrl}/account/subscribers/`)
+            .pipe(
+                map(val => val.items = this.getShortList(val.items, subscribersShowingAmount))
+            );
+    }
+
     getMe() {
         return this.http.get<Profile>(`${this.baseApiUrl}/account/me`)
             .pipe(
@@ -26,17 +37,38 @@ export class ProfileService {
             );
     }
 
-    getAccount(id: string) {
-        return this.http.get<Profile>(`${this.baseApiUrl}/account/${id}`);
+    getAccount(accountId: number) {
+        return this.http.get<Profile>(`${this.baseApiUrl}/account/${accountId}`);
     }
 
-    getSubscribersShortList(subscribersAmount: number) {
-        const skipCount = 0;
+    getSubscribersShortList(
+        accountId: number | undefined, 
+        subscribersShowingAmount: number, 
+        isRandomSubscribers: boolean = false
+    ) {
+        if (!accountId)
+            return of(undefined);
 
-        return this.http.get<Pagable<Profile>>(`${this.baseApiUrl}/account/subscribers/`)
-            .pipe(
-                map(val => val.items.slice(skipCount, subscribersAmount + skipCount))
-            );
+        return this.getRandomPageNumber(accountId).pipe(
+            switchMap(randomPageNumber => {
+                return this.http.get<Pagable<Profile>>(`${this.baseApiUrl}/account/subscribers/${accountId}?page=${randomPageNumber}`)
+                    .pipe(map(val => {
+                        let subscribers = [...val.items];
+
+                        if (isRandomSubscribers) {
+                            subscribers = this.getRandomItemsFromArray(subscribers);
+                        }
+
+                        subscribers = this.getShortList(subscribers, subscribersShowingAmount);
+
+                        return subscribers;
+                    }))
+            })
+        );
+    }
+
+    getAllSubscribers(accountId: number | undefined) {
+        return this.http.get<Pagable<Profile[]>>(`${this.baseApiUrl}/account/subscribers/${accountId}`);
     }
 
     patchProfile(profile: Partial<Profile>) {
@@ -63,5 +95,25 @@ export class ProfileService {
         ).pipe(
             tap(res => this.filteredProfiles.set(res.items))
         );
+    }
+
+    getRandomPageNumber(accountId: number) {
+        return this.http.get<Pagable<Profile>>(`${this.baseApiUrl}/account/subscribers/${accountId}`)
+            .pipe(
+                map(val => this.getRandomNumberFromInterval(1, val.pages))
+            );
+    }
+
+
+    private getRandomNumberFromInterval(min: number, max: number) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+
+    private getRandomItemsFromArray(arr: any[]) {
+        return arr.sort(() => 0.5 - Math.random());
+    }
+
+    private getShortList(arr: any[], showingElementsAmount: number) {
+        return arr.slice(0, showingElementsAmount);
     }
 }

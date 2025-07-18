@@ -20,7 +20,7 @@
             <h3 class="h6 mb16">Подписчики</h3>
             
             <div class="subscribers-wrapper mb32">
-                @for (subscriber of subscribers$ | async; track subscriber.id) 
+                @for (subscriber of subscribersShortList$ | async; track subscriber.id) 
                 {
                     <a
                         class="subscriber-avatar-btn" 
