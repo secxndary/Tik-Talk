@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import "fonts";
 @import "margins";
+@import "avatars";
 
 :root {
     --dark-color: #000000;
@@ -35,6 +36,7 @@ body {
     padding: 4px 8px;
     margin-right: 4px;
     margin-bottom: 4px;
+    width: max-content;
     border: 1px solid var(--light-color);
     border-radius: 4px;
     font-size: 12px;
