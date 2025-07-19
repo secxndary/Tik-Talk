@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { Profile } from '../../../data/interfaces/profile.interface';
-import { ImgUrlPipe } from "../../../helpers/pipes/img-url.pipe";
 import { RouterLink } from '@angular/router';
+import { AvatarPlaceholderComponent } from "../../avatar-placeholder/avatar-placeholder.component";
 
 @Component({
     selector: 'app-subscriber-card',
-    imports: [ImgUrlPipe, RouterLink],
+    imports: [RouterLink, AvatarPlaceholderComponent],
     templateUrl: './subscriber-card.component.html',
     styleUrl: './subscriber-card.component.scss'
 })

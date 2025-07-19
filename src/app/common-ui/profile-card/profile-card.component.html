@@ -1,12 +1,14 @@
 @if (profile) {
     <div class="profile-card">
         <div class="avatar-name">
-            <img 
-                [src]="profile.avatarUrl | imgUrl" 
-                [alt]="profile.lastName"
-                class="profile-card__avatar" 
+            <app-avatar-placeholder
+                [profile]="profile"
+                [class]="'avatar-img size--70 tt-link'"
+                [routerLink]="['/profile', profile.id]"
             >
-            <div class="profile-card__name">
+            </app-avatar-placeholder>
+
+            <div class="profile-card__name tt-link" [routerLink]="['/profile', profile.id]">
                 <strong class="h6">{{ profile.firstName }} {{ profile.lastName }}</strong>
                 <span class="subtitle">{{ profile.username }}</span>
             </div>

@@ -8,16 +8,17 @@ import { toObservable } from '@angular/core/rxjs-interop';
 import { SvgIconComponent } from "../../common-ui/svg-icon/svg-icon.component";
 import { ImgUrlPipe } from '../../helpers/pipes/img-url.pipe';
 import { PostFeedComponent } from "./post-feed/post-feed.component";
+import { AvatarPlaceholderComponent } from '../../common-ui/avatar-placeholder/avatar-placeholder.component';
 
 @Component({
     selector: 'app-profile-page',
     imports: [
         RouterLink,
         AsyncPipe,
-        ImgUrlPipe,
         ProfileHeaderComponent,
         SvgIconComponent,
-        PostFeedComponent
+        PostFeedComponent,
+        AvatarPlaceholderComponent
     ],
     templateUrl: './profile-page.component.html',
     styleUrl: './profile-page.component.scss'

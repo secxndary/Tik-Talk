@@ -26,12 +26,13 @@
                         class="subscriber-avatar-btn" 
                         [routerLink]="['/profile', subscriber.id]"
                     >
-                        <img 
-                            class="subscriber-avatar-img"
-                            [src]="subscriber.avatarUrl | imgUrl"
-                        >
+                        <app-avatar-placeholder
+                            class="avatar-img size--36"
+                            [profile]="subscriber">
+                        </app-avatar-placeholder>
                     </a>
                 }
+
                 <a class="to-subscribers-search" [routerLink]="['/search']"></a>
             </div>
 

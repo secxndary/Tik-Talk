@@ -1,10 +1,10 @@
 import { Component, input } from '@angular/core';
 import { Profile } from '../../data/interfaces/profile.interface';
-import { ImgUrlPipe } from '../../helpers/pipes/img-url.pipe';
+import { AvatarPlaceholderComponent } from "../avatar-placeholder/avatar-placeholder.component";
 
 @Component({
     selector: 'app-profile-header',
-    imports: [ImgUrlPipe],
+    imports: [AvatarPlaceholderComponent],
     templateUrl: './profile-header.component.html',
     styleUrl: './profile-header.component.scss'
 })
