@@ -1,0 +1,22 @@
+@if (profile) {
+    @if (profile.avatarUrl) {
+        <img
+            [src]="avatarUrl | imgUrl"
+            [className]="class" 
+            [alt]="
+                profile.firstName || profile.lastName 
+                ? profile.firstName + ' ' + profile.lastName 
+                : profile.username"
+        >
+    }
+    @else {
+        <img
+            [src]="avatarUrl"
+            [className]="class"
+            [alt]="
+                profile.firstName || profile.lastName 
+                ? profile.firstName + ' ' + profile.lastName 
+                : profile.username"
+        >
+    }
+}
