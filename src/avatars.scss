@@ -1,0 +1,25 @@
+.avatar-img {
+    border-radius: 50%;
+}
+
+.size {
+    &--32 {
+        width: 32px;
+        height: 32px;
+    }
+    
+    &--36 {
+        width: 36px;
+        height: 36px;
+    }
+
+    &--70 {
+        width: 70px;
+        height: 70px;
+    }
+    
+    &--112 {
+        width: 112px;
+        height: 112px;
+    }
+}
