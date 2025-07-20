@@ -38,20 +38,10 @@
 
 <footer class="sidebar__footer">
     @if (me(); as me) {
-        
-        @if (me.avatarUrl) {
-            <img 
-                [routerLink]="['profile/me']" 
-                [src]="me.avatarUrl | imgUrl"
-                class="tt-link" [alt]="me.lastName"
-            >
-        } @else {
-            <img 
-                [routerLink]="['profile/me']" 
-                src="/assets/images/avatar-placeholder.png" 
-                class="tt-link" [alt]="me.lastName"
-            >
-        }
+        <app-avatar-placeholder
+            [profile]="me"
+            [class]="'avatar-img size--32 tt-link'"
+        ></app-avatar-placeholder>
 
         <div [routerLink]="['profile/me']" class="medium-text username-text tt-link">{{ me.username }}</div>
 

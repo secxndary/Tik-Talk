@@ -5,7 +5,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { ProfileService } from '../../data/services/profile.service';
 import { SubscriberCardComponent } from "./subscriber-card/subscriber-card.component";
 import { firstValueFrom } from 'rxjs';
-import { ImgUrlPipe } from "../../helpers/pipes/img-url.pipe";
+import { AvatarPlaceholderComponent } from "../avatar-placeholder/avatar-placeholder.component";
 
 @Component({
     selector: 'app-sidebar',
@@ -15,9 +15,9 @@ import { ImgUrlPipe } from "../../helpers/pipes/img-url.pipe";
         RouterLink,
         AsyncPipe,
         SubscriberCardComponent,
-        ImgUrlPipe,
-        RouterLinkActive
-],
+        RouterLinkActive,
+        AvatarPlaceholderComponent
+    ],
     templateUrl: './sidebar.component.html',
     styleUrl: './sidebar.component.scss'
 })
