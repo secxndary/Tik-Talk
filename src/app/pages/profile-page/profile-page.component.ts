@@ -4,9 +4,8 @@ import { ProfileService } from '../../data/services/profile.service';
 import { AsyncPipe } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { map, of, switchMap } from 'rxjs';
-import { toObservable } from '@angular/core/rxjs-interop';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { SvgIconComponent } from "../../common-ui/svg-icon/svg-icon.component";
-import { ImgUrlPipe } from '../../helpers/pipes/img-url.pipe';
 import { PostFeedComponent } from "./post-feed/post-feed.component";
 import { AvatarPlaceholderComponent } from '../../common-ui/avatar-placeholder/avatar-placeholder.component';
 
@@ -32,6 +31,11 @@ export class ProfilePageComponent {
 
     profileId = signal<number | undefined>(undefined);
     profileId$ = toObservable(this.profileId);
+
+    me$ = toObservable(this.profileService.me);
+    meId = toSignal(this.me$.pipe(
+        map(val => val?.id))
+    );
 
     profile$ = this.route.params
         .pipe(switchMap(({ id }) => {
@@ -61,12 +65,11 @@ export class ProfilePageComponent {
                 return of(null);
 
             return this.profileService.getSubscribersShortList(
-                this.profileId(), 
-                this.subscribersShowingAmount, 
+                this.profileId(),
+                this.subscribersShowingAmount,
                 this.isSubscribersShortListRandom
             );
         }));
 
-    me$ = toObservable(this.profileService.me);
     subscribersAmount$ = this.profile$.pipe(map(val => val?.subscribersAmount));
 }
