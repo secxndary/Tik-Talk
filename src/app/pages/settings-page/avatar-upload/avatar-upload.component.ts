@@ -18,7 +18,6 @@ export class AvatarUploadComponent {
     profileService = inject(ProfileService);
 
     fileBrowserHandler(event: Event) {
-        // ?.[0] — зачем точка?
         const file = (event.target as HTMLInputElement)?.files?.[0];
 
         this.processFile(file);
