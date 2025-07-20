@@ -44,28 +44,18 @@ export class ProfileService {
 
     getSubscribersShortList(
         accountId: number | undefined, 
-        subscribersShowingAmount: number, 
+        subscribersShowingAmount: number = 6, 
         isRandomSubscribers: boolean = false
     ) {
         if (!accountId)
             return of(undefined);
 
-        return this.getRandomPageNumber(accountId).pipe(
-            switchMap(randomPageNumber => {
-                return this.http.get<Pagable<Profile>>(`${this.accountApiUrl}/subscribers/${accountId}?page=${randomPageNumber}`)
-                    .pipe(map(val => {
-                        let subscribers = [...val.items];
+        const endpoint = `${this.accountApiUrl}/subscribers/${accountId}`;
 
-                        if (isRandomSubscribers) {
-                            subscribers = this.getRandomItemsFromArray(subscribers);
-                        }
-
-                        subscribers = this.getShortList(subscribers, subscribersShowingAmount);
-
-                        return subscribers;
-                    }))
-            })
-        );
+        return this.getRandomElementsFromRandomPage<Profile>(endpoint, isRandomSubscribers)
+            .pipe(
+                map(subscribers => this.getShortList(subscribers, subscribersShowingAmount, isRandomSubscribers))
+            );
     }
 
     getAllSubscribers(accountId: number | undefined) {
@@ -98,13 +88,35 @@ export class ProfileService {
         );
     }
 
-    getRandomPageNumber(accountId: number) {
-        return this.http.get<Pagable<Profile>>(`${this.accountApiUrl}/subscribers/${accountId}`)
+
+    private getRandomElementsFromRandomPage<T>(endpoint: string, isRandomItems: boolean = false) {
+        return this.getRandomPageNumber(endpoint)
+            .pipe(switchMap(randomPageNumber => {
+                return this.http.get<Pagable<T>>(
+                    endpoint,
+                    {
+                        params: {
+                            page: randomPageNumber
+                        }
+                    })
+                    .pipe(map(val => {
+                        let items = [...val.items];
+
+                        if (isRandomItems) {
+                            items = this.getRandomItemsFromArray(items);
+                        }
+
+                        return items;
+                    }));
+            }));
+    }
+
+    private getRandomPageNumber(endpoint: string) {
+        return this.http.get<Pagable<Profile>>(endpoint)
             .pipe(
                 map(val => this.getRandomNumberFromInterval(1, val.pages))
             );
     }
-
 
     private getRandomNumberFromInterval(min: number, max: number) {
         return Math.floor(Math.random() * (max - min + 1) + min);
