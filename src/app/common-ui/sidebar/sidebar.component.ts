@@ -25,7 +25,9 @@ export class SidebarComponent {
     profileService = inject(ProfileService);
 
     subscribersShowingAmount = 5;
-    subscribers$ = this.profileService.getTestSubscribersShortList(this.subscribersShowingAmount);
+    isRandomSubscribers = true;
+
+    subscribers$ = this.profileService.getMySubscribersShortList(this.subscribersShowingAmount, this.isRandomSubscribers);
 
     me = this.profileService.me;
 

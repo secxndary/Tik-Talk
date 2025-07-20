@@ -31,7 +31,8 @@ export class ProfileFiltersComponent implements OnDestroy {
                     return this.profileService.filterProfiles(formValue)
                 }),
                 takeUntilDestroyed()
-            ).subscribe();
+            )
+            .subscribe();
     }
 
     ngOnDestroy() {

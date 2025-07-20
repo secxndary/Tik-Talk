@@ -20,14 +20,19 @@ export class ProfileService {
         return this.http.get<Profile[]>(`${this.accountApiUrl}/test_accounts`);
     }
 
-    getTestSubscribers() {
+    getMySubscribers() {
         return this.http.get<Pagable<Profile[]>>(`${this.accountApiUrl}/subscribers/`);
     }
 
-    getTestSubscribersShortList(subscribersShowingAmount: number = 6) {
-        return this.http.get<Pagable<Profile>>(`${this.accountApiUrl}/subscribers/`)
+    getMySubscribersShortList(
+        subscribersShowingAmount: number = 6, 
+        isRandomSubscribers: boolean = false
+    ) {
+        return this.getMySubscribers()
             .pipe(
-                map(val => val.items = this.getShortList(val.items, subscribersShowingAmount))
+                map(val => { 
+                    return val.items = this.getShortList(val.items, subscribersShowingAmount, isRandomSubscribers);
+                })
             );
     }
 
@@ -126,7 +131,12 @@ export class ProfileService {
         return arr.sort(() => 0.5 - Math.random());
     }
 
-    private getShortList(arr: any[], showingElementsAmount: number) {
-        return arr.slice(0, showingElementsAmount);
+    private getShortList(arr: any[], showingElementsAmount: number, isRandomItems = false) {
+        let items = [...arr];
+
+        if (isRandomItems)
+            items = this.getRandomItemsFromArray(items);
+
+        return items.slice(0, showingElementsAmount);
     }
 }
