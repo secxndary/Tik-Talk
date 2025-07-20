@@ -43,7 +43,7 @@
             <div class="skills-wrapper mb32">
                 <h3 class="h5 mb16">Навыки</h3>
                 <div class="skills-list-wrapper">
-                    @if (profile.stack.length === 0) {
+                    @if (profile$ === me$ && profile.stack.length === 0) {
                         <a [routerLink]="['/settings']" class="tt-link-primary">
                             <p class="medium-text">Добавить навыки</p>
                         </a>
@@ -58,7 +58,7 @@
 
             <div class="description-wrapper">
                 <h3 class="h5 mb16">О себе</h3>
-                @if (profile.description.length === 0) {
+                @if (profile$ === me$ && profile.description.length === 0) {
                     <a [routerLink]="['/settings']" class="tt-link-primary">
                         <p class="medium-text">Добавить раздел "О себе"</p>
                     </a>

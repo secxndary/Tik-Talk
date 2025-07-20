@@ -35,8 +35,11 @@ export class ProfilePageComponent {
 
     profile$ = this.route.params
         .pipe(switchMap(({ id }) => {
-            if (id === 'me')
+            if (id === 'me') {
+                this.profileId.set(this.profileService.me()?.id);
+
                 return this.me$;
+            }
 
             const numericId = Number(id);
             this.profileId.set(numericId);
