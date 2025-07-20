@@ -34,6 +34,20 @@
     padding: 24px;
 }
 
+.subscribers-amount__wrapper {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+}
+
+.subscribers-amount {
+    height: 24px;
+    width: fit-content;
+    padding: 4px 6px;
+    background-color: var(--success-color);
+    color: var(--dark-color);
+}
+
 .subscribers-wrapper {
     display: flex;
     gap: 6px;

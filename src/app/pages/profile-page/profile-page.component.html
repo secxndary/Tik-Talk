@@ -17,8 +17,12 @@
         <app-post-feed></app-post-feed>
 
         <div class="profile-page__profile-info">
-            <h3 class="h6 mb16">Подписчики</h3>
-            
+
+            <div class="subscribers-amount__wrapper h6 mb16">
+                <h3 class="h5">Подписчики</h3>
+                <div class="subscribers-amount h6">{{ subscribersAmount$ | async }}</div>
+            </div>
+
             <div class="subscribers-wrapper mb32">
                 @for (subscriber of subscribersShortList$ | async; track subscriber.id) 
                 {
