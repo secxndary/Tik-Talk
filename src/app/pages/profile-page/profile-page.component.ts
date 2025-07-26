@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { ProfileHeaderComponent } from "../../common-ui/profile-header/profile-header.component";
 import { ProfileService } from '../../data/services/profile.service';
 import { AsyncPipe } from '@angular/common';
@@ -36,6 +36,8 @@ export class ProfilePageComponent {
     meId = toSignal(this.me$.pipe(
         map(val => val?.id))
     );
+
+    isCurrentPageMePage = computed(() => this.profileId() === this.meId());
 
     profile$ = this.route.params
         .pipe(switchMap(({ id }) => {

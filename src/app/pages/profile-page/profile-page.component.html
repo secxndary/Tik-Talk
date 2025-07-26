@@ -4,7 +4,7 @@
             [profile]="profile">
         </app-profile-header>
 
-        @if (profile.id === (me$ | async)?.id) {
+        @if (isCurrentPageMePage()) {
             <a class="btn to-settings-btn" [routerLink]="['/settings']">
                 Редактировать
                 <svg icon="settings" class="to-settings-icon"></svg>
@@ -14,7 +14,11 @@
 
 
     <main class="profile-page__body">
-        <app-post-feed></app-post-feed>
+        <app-post-feed 
+            [profile]="profile" 
+            [isPostFeedShown]="isCurrentPageMePage()"
+        >
+        </app-post-feed>
 
         <div class="profile-page__profile-info">
 
@@ -43,7 +47,7 @@
             <div class="skills-wrapper mb32">
                 <h3 class="h5 mb16">Навыки</h3>
                 <div class="skills-list-wrapper">
-                    @if (profileId() === meId() && profile.stack.length === 0) {
+                    @if (isCurrentPageMePage() && profile.stack.length === 0) {
                         <a [routerLink]="['/settings']" class="tt-link-primary">
                             <p class="medium-text">Добавить навыки</p>
                         </a>
@@ -58,7 +62,7 @@
 
             <div class="description-wrapper">
                 <h3 class="h5 mb16">О себе</h3>
-                @if (profileId() === meId() && profile.description.length === 0) {
+                @if (isCurrentPageMePage() && profile.description.length === 0) {
                     <a [routerLink]="['/settings']" class="tt-link-primary">
                         <p class="medium-text">Добавить раздел "О себе"</p>
                     </a>
