@@ -8,10 +8,10 @@ import { map, of, switchMap, tap } from 'rxjs';
     providedIn: 'root'
 })
 export class ProfileService {
-    http = inject(HttpClient);
-
     baseApiUrl = 'https://icherniakov.ru/yt-course';
     accountApiUrl = `${this.baseApiUrl}/account`;
+
+    http = inject(HttpClient);
 
     me = signal<Profile | null>(null);
     filteredProfiles = signal<Profile[]>([]);

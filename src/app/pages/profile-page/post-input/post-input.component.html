@@ -10,13 +10,14 @@
         placeholder="Напишите что-нибудь..."
         rows="1"
         (input)="onTextAreaInput($event)"
+        [(ngModel)]="postText"
     ></textarea>
 
     <div class="emoji-picker btn-icon">
         <svg icon="emoji" class="tt-link"></svg>
     </div>
 
-    <div class="send-button btn-icon tt-link">
+    <div class="send-button btn-icon tt-link" (click)="onCreatePost()">
         <svg icon="arrow-send"></svg>
     </div>
 }
