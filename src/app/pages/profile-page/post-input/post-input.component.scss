@@ -1,0 +1,52 @@
+:host {
+    display: grid;
+    grid-template-columns: 44px 1fr 44px 44px;
+    grid-gap: 12px;
+    padding: 16px;
+    border: 1px solid var(--light-color);
+    background-color: var(--dark-color);
+    height: max-content;
+    align-items: end;
+}
+
+.btn-icon {
+    height: 44px;
+    width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hidden-textarea {
+    font-family: 'JetBrains Mono';
+    font-size: 14px;
+    line-height: 21px;
+    padding: 12px 8px;
+    color: var(--light-color);
+    background: transparent;
+    overflow: hidden;
+    border: none;
+    resize: none;
+
+    &:focus-visible, &:focus {
+        outline: none;
+    }
+}
+
+.emoji-picker {
+    svg {
+        color: var(--light-color);
+        width: 16px;
+        height: 16px;
+    }
+}
+
+.send-button {
+    background-color: var(--primary-color);
+
+    svg {
+        color: var(--dark-color);
+        width: 16px;
+        height: 16px;
+    }
+}

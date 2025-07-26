@@ -1,1 +1,22 @@
-<p>post-input works!</p>
+@if (profile) {
+    <app-avatar-placeholder
+        [profile]="profile"
+        [class]="'avatar-img size--32'"
+        class="btn-icon"
+    ></app-avatar-placeholder>
+
+    <textarea
+        class="hidden-textarea" 
+        placeholder="Напишите что-нибудь..."
+        rows="1"
+        (input)="onTextAreaInput($event)"
+    ></textarea>
+
+    <div class="emoji-picker btn-icon">
+        <svg icon="emoji" class="tt-link"></svg>
+    </div>
+
+    <div class="send-button btn-icon tt-link">
+        <svg icon="arrow-send"></svg>
+    </div>
+}
