@@ -11,5 +11,5 @@ import { Profile } from '../../../data/interfaces/profile.interface';
 })
 export class PostFeedComponent {
     @Input() profile!: Profile;
-    isPostFeedShown = input<boolean>(false);
+    isPostInputShown = input<boolean>(false);
 }

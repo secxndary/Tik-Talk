@@ -1,5 +1,8 @@
-@if (profile && isPostFeedShown()) {
-    <app-post-input class="mb32"></app-post-input>
+@if (profile) {
+
+    @if (isPostInputShown()) {
+        <app-post-input class="mb32"></app-post-input>
+    }
 
     <app-post></app-post>
 }
