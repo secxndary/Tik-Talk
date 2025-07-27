@@ -3,20 +3,14 @@
         <img
             [src]="avatarUrl | imgUrl"
             [className]="class" 
-            [alt]="
-                profile.firstName || profile.lastName 
-                ? profile.firstName + ' ' + profile.lastName 
-                : profile.username"
+            [alt]="profile | profileName"
         >
     }
     @else {
         <img
             [src]="avatarUrl"
             [className]="class"
-            [alt]="
-                profile.firstName || profile.lastName 
-                ? profile.firstName + ' ' + profile.lastName 
-                : profile.username"
+            [alt]="profile | profileName"
         >
     }
 }

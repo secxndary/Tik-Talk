@@ -13,7 +13,7 @@ export interface Post {
     communityId: number;
     content: string;
     author: Profile;
-    images?: string[];
+    images: string[];
     createdAt: string;
     updatedAt: string;
     likes: number;

@@ -1,12 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { Profile } from '../../data/interfaces/profile.interface';
 import { ImgUrlPipe } from '../../helpers/pipes/img-url.pipe';
+import { ProfileNamePipe } from "../../helpers/pipes/profile-name.pipe";
 
 @Component({
     selector: 'app-avatar-placeholder',
     templateUrl: 'avatar-placeholder.component.html',
     styleUrl: 'avatar-placeholder.component.scss',
-    imports: [ImgUrlPipe]
+    imports: [ImgUrlPipe, ProfileNamePipe]
 })
 export class AvatarPlaceholderComponent {
     boringAvatarsApi = 'https://hostedboringavatars.vercel.app/api';
