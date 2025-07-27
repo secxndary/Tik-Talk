@@ -1,8 +1,8 @@
-@if (profile) {
+@if (profile(); as profile) {
 
-    @if (isCurrentPageMePage()) {
-        <app-post-input class="mb32"></app-post-input>
+    <app-post-input class="mb32"></app-post-input>
+
+    @for (post of posts(); track post.id) {
+        <app-post [post]="post"></app-post>
     }
-
-    <app-post></app-post>
 }
