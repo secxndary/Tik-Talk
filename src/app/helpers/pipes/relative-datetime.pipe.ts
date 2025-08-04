@@ -10,17 +10,31 @@ export class RelativeDateTimePipe implements PipeTransform {
             return null;
         }
 
-        const date = DateTime.fromISO(value).setLocale('ru-RU');;
-        const dateInGmtPlus3 = date.plus({ hours: 3 });
+        const utcDate = DateTime.fromISO(value, { zone: 'UTC', locale: 'ru-RU' });
+        const localDate = utcDate.setZone('system');
+        const now = DateTime.now().setZone(localDate.zoneName ? localDate.zoneName : 'Europe/Moscow');
 
-        if (dateInGmtPlus3.diffNow('days').days > -4) {
-            return dateInGmtPlus3.toRelative();
+        const startOfToday = now.startOf('day');
+        const startOfYesterday = startOfToday.minus({ days: 1 });
+        const startOfDayBeforeYesterday = startOfToday.minus({ days: 2 });
+        const startOfThisYear = now.startOf('year');
+
+        if (localDate >= startOfToday) {
+            return localDate.toRelative();
         }
 
-        if (dateInGmtPlus3.diffNow('years').years <= -1) {
-            return dateInGmtPlus3.toFormat('d MMMM yyyy в HH:mm');
+        if (localDate >= startOfYesterday && localDate < startOfToday) {
+            return localDate.toFormat('вчера в HH:mm');
         }
 
-        return dateInGmtPlus3.toFormat('d MMMM в HH:mm');
+        if (localDate >= startOfDayBeforeYesterday && localDate < startOfYesterday) {
+            return localDate.toFormat('позавчера в HH:mm');
+        }
+
+        if (localDate <= startOfThisYear) {
+            return localDate.toFormat('d MMMM yyyy в HH:mm');
+        }
+
+        return localDate.toFormat('d MMMM в HH:mm');
     }
 }
