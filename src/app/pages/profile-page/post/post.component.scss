@@ -1,0 +1,25 @@
+:host {
+    height: auto;
+    min-width: 260px;
+    border: 1px solid var(--light-color);
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    grid-gap: 12px;
+    padding: 16px;
+    margin-bottom: 16px;
+    background-color: var(--dark-color);
+    align-items: start;
+}
+
+.post-content {
+    word-break: break-word;
+    white-space: break-spaces;
+}
+
+#post-author-name {
+    margin-right: 20px;
+}
+
+#post-author-name:empty {
+    margin-right: 0;
+}

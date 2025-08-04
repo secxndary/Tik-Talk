@@ -1,1 +1,17 @@
-<p>post works!</p>
+@if (post(); as post) {
+    <app-avatar-placeholder
+        [profile]="post.author"
+        [class]="'avatar-img size--32'"
+        [routerLink]="['/profile', post.author.id]"
+        class="centered-container tt-link"
+    ></app-avatar-placeholder>
+
+    <div class="post__wrapper">
+        <div class="row-baseline mb8">
+            <p class="regular" id="post-author-name">{{ post.author | profileName }}</p>
+            <p class="small-text">{{ post.createdAt | relativeDateTime }}</p>
+        </div>
+
+        <div class="post-content small-text">{{ post.content }}</div>
+    </div>  
+}
