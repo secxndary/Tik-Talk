@@ -18,6 +18,7 @@ export class PostFeedComponent {
     posts = this.postService.posts;
 
     constructor() {
+        // зачем effect?
         effect(() => {
             firstValueFrom(this.postService.getPosts(this.profile()?.id))
         })
