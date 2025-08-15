@@ -25,8 +25,8 @@ import { ProfileService } from '../../../data/services/profile.service';
 export class PostComponent {
     postService = inject(PostService);
     profileService = inject(ProfileService);
-    meId = computed(() => this.profileService.me()?.id!);
     r2 = inject(Renderer2);
+    meId = computed(() => this.profileService.me()?.id!);
 
     post = input<Post>();
     likes = computed(() => this.post()?.likes);
@@ -46,12 +46,14 @@ export class PostComponent {
         }
 
         this.isPostLikedByMe.update(val => !val);
-
-        
     }
 
     onCommentButton(event: Event) {
 
+    }
+
+    onSettingsButton($event: Event) {
+        throw new Error('Method not implemented.');
     }
 
     ngOnInit() {
