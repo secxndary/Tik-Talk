@@ -46,4 +46,18 @@ export class PostService {
                 switchMap(() => this.getMyPosts())  //  getMyPosts или getPosts(id)?
             );
     }
+
+    createLike(postId: number | undefined) {
+        if (!postId)
+            return of(undefined);
+
+        return this.http.post(`${this.postApiUrl}/like/${postId}`, null);
+    }
+
+    removeLike(postId: number | undefined) {
+        if (!postId)
+            return of(undefined);
+
+        return this.http.delete(`${this.postApiUrl}/like/${postId}`);
+    }
 }

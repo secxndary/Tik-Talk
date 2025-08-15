@@ -1,19 +1,19 @@
 :host {
-    height: auto;
-    min-width: 260px;
+    background-color: var(--dark-color);
     border: 1px solid var(--light-color);
     display: grid;
-    grid-template-columns: 44px 1fr;
+    grid-template-columns: 44px 1fr 16px;
     grid-gap: 12px;
+    align-items: start;
+    min-width: 260px;
+    height: auto;
     padding: 16px;
     margin-bottom: 16px;
-    background-color: var(--dark-color);
-    align-items: start;
 }
 
 .post-content {
     word-break: break-word;
-    white-space: break-spaces;
+    white-space: pre-line;
 }
 
 #post-author-name {
@@ -22,4 +22,48 @@
 
 #post-author-name:empty {
     margin-right: 0;
+}
+
+#post-created-at {
+    color: var(--light-transparent-color)
+}
+
+.likes-and-comments {
+    display: flex;
+    align-items: center;
+}
+
+.likes-counter {
+    margin-right: 18px;
+}
+
+.likes-counter:empty {
+    margin-right: 10px;
+}
+
+.like__wrapper,
+.comment__wrapper {
+    gap: 5px;
+
+    &:hover, 
+    &.active {
+        color: var(--primary-color);
+
+        svg {
+            color: var(--primary-color);
+        }
+    }
+}
+
+.like-btn,
+.comment-btn {
+    width: 17px;
+    height: 16px;
+    color: var(--light-color);
+}
+
+#three-dots {
+    width: 16px;
+    height: 16px;
+    color: var(--light-color);
 }
