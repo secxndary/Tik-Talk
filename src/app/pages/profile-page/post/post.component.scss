@@ -74,3 +74,9 @@
         color: var(--primary-color);
     }
 }
+
+.post__comments-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}

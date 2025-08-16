@@ -32,5 +32,18 @@
                 <p class="regular">{{ post.comments.length > 0 ? post.comments.length : '' }}</p>
             </div>
         </div>
+
+        <div class="post__comments-wrapper">
+            @for (comment of post.comments; track comment.id) {
+                <app-comment
+                    [comment]="comment"
+                ></app-comment>
+            }
+        </div>
+
+        <app-post-input
+            [isCommentInput]="true"
+            [postId]="post.id"
+        ></app-post-input>
     </main>
 }

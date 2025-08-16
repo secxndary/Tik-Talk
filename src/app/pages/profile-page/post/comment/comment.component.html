@@ -1,0 +1,19 @@
+@if (comment(); as comment) {
+    <app-avatar-placeholder
+        [profile]="comment.author"
+        [class]="'avatar-img size--32'"
+        [routerLink]="['/profile', comment.author.id]"
+        class="centered-container tt-link"
+    ></app-avatar-placeholder>
+
+    <div class="comment__header-and-content">
+        <header class="header-row mb8">
+            <div class="name-and-time row-baseline">
+                <p class="regular" id="comment-author-name">{{ comment.author | profileName }}</p>
+                <p class="small-text comment-created-at">{{ comment.createdAt | relativeDateTime }}</p>
+            </div>
+        </header>
+
+        <div class="comment-content small-text">{{ comment.text }}</div>
+    </div>
+}
