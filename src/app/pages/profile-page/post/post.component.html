@@ -7,21 +7,19 @@
     ></app-avatar-placeholder>
 
     <main class="post-body">
-        <div class="post__wrapper">
-            <div class="header-and-content">
-                <header class="header-row mb8">
-                    <div class="name-and-time">
-                        <p class="regular" id="post-author-name">{{ post.author | profileName }}</p>
-                        <p class="small-text" id="post-created-at">{{ post.createdAt | relativeDateTime }}</p>
-                    </div>
+        <div class="header-and-content">
+            <header class="header-row mb8">
+                <div class="name-and-time row-baseline">
+                    <p class="regular" id="post-author-name">{{ post.author | profileName }}</p>
+                    <p class="small-text" id="post-created-at">{{ post.createdAt | relativeDateTime }}</p>
+                </div>
 
-                    <div class="settings__wrapper centered-container tt-link" (click)="onSettingsButton($event)">
-                        <svg icon="three-dots" id="three-dots"></svg>
-                    </div>
-                </header>
+                <div class="settings__wrapper centered-container tt-link" (click)="onSettingsButton($event)">
+                    <svg icon="three-dots" class="three-dots-btn"></svg>
+                </div>
+            </header>
 
-                <div class="post-content small-text mb16">{{ post.content }}</div>
-            </div>
+            <div class="post-content small-text mb16">{{ post.content }}</div>
         </div>
 
         <div class="likes-and-comments">

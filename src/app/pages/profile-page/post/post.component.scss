@@ -18,15 +18,13 @@
     gap: 18px;
 }
 
-.name-and-time {
-    display: flex;
-    align-items: baseline;
-    gap: 18px;
-}
-
 .post-content {
     word-break: break-word;
     white-space: pre-line;
+}
+
+#post-author-name {
+    margin-right: 20px;
 }
 
 #post-author-name:empty {
@@ -42,7 +40,7 @@
     width: 20px;
 }
 
-#three-dots {
+.three-dots-btn {
     width: 12px;
     height: 3px;
     color: var(--light-color);
