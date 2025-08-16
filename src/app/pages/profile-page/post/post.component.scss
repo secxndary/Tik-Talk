@@ -66,16 +66,5 @@
     &:hover, 
     &.active {
         color: var(--primary-color);
-
-        svg {
-            color: var(--primary-color);
-        }
     }
-}
-
-.like-btn,
-.comment-btn {
-    width: 17px;
-    height: 16px;
-    color: var(--light-color);
 }

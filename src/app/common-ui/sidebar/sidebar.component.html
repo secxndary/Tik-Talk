@@ -12,7 +12,7 @@
                 [routerLink]="[menuItem.link]"
                 routerLinkActive="active"
             >
-                <svg [icon]="menuItem.icon"></svg>
+                <svg [icon]="menuItem.icon" class="svg16"></svg>
                 <span>{{ menuItem.label }}</span>
             </a>
         </li>
@@ -32,7 +32,7 @@
         [routerLink]="['/subscribers']"
     >
         <p class="medium-text">Все подписчики</p>
-        <svg icon="arrow" class="to-subscribers-icon"></svg>
+        <svg icon="arrow" class="svg16"></svg>
     </a>
 </div>
 
@@ -45,7 +45,7 @@
 
         <div [routerLink]="['profile/me']" class="medium-text username-text tt-link">{{ me.username }}</div>
 
-        <a [routerLink]="['settings']" class="settings-btn">
+        <a [routerLink]="['settings']" class="settings-btn svg16">
             <svg icon="settings"></svg>
         </a>
     }

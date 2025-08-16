@@ -38,11 +38,6 @@
     }
 }
 
-.menu-item svg {
-    width: 16px;
-    height: 16px;
-}
-
 .to-subscribers-link {
     display: flex;
     gap: 10px;
@@ -51,11 +46,6 @@
     color: var(--primary-color);
     text-decoration: none;
     white-space: nowrap;
-}
-
-.to-subscribers-icon {
-    width: 11px;
-    height: 16px;
 }
 
 .sidebar__footer {
@@ -70,27 +60,14 @@
     grid-gap: 12px;
     align-items: center;
 
-    img {
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-    }
-
     .username-text {
         font-family: 'JetBrains Mono Bold';
         color: var(--primary-color);
     }
 }
 
-.settings-btn {
-    width: 15px;
-    height: 16px;
-
-    svg {
-        width: 15px;
-        height: 16px;
-        color: var(--primary-color);
-    }
+.settings-btn svg {
+    color: var(--primary-color);
 }
 
 .list-item-clean {

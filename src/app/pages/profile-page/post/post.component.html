@@ -24,11 +24,11 @@
 
         <div class="likes-and-comments">
             <div class="like__wrapper row tt-link" (click)="onLikeButton($event)">
-                <svg icon="like" class="like-btn"></svg>
+                <svg icon="like" class="like-btn svg16"></svg>
                 <p class="regular likes-counter">{{ likes() }}</p>
             </div>
             <div class="comment__wrapper row tt-link" (click)="onCommentButton($event)">
-                <svg icon="comment" class="comment-btn"></svg>
+                <svg icon="comment" class="comment-btn svg16"></svg>
                 <p class="regular">{{ post.comments.length > 0 ? post.comments.length : '' }}</p>
             </div>
         </div>
