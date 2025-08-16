@@ -9,6 +9,23 @@
     align-items: end;
 }
 
+:host.comment {
+    border: 1px dashed var(--light-transparent-color);
+    border-radius: 4px;
+    padding: 10px;
+    grid-template-columns: 32px 1fr 32px 32px;
+
+    .btn-icon {
+        height: 32px;
+        width: 32px;
+    }
+
+    .hidden-textarea {
+        font-size: 12px;
+        padding: 4px 8px;
+    }
+}
+
 .btn-icon {
     height: 44px;
     width: 44px;
@@ -28,7 +45,8 @@
     border: none;
     resize: none;
 
-    &:focus-visible, &:focus {
+    &:focus-visible,
+    &:focus {
         outline: none;
     }
 }
@@ -36,7 +54,7 @@
 .send-button {
     background-color: var(--primary-color);
 
-    svg {
+    .arrow-send {
         color: var(--dark-color);
     }
 }

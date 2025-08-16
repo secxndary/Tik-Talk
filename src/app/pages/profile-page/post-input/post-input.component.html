@@ -6,9 +6,9 @@
     ></app-avatar-placeholder>
 
     <textarea
-        class="hidden-textarea" 
-        placeholder="Напишите что-нибудь..."
+        class="hidden-textarea"
         rows="1"
+        [placeholder]="isComment ? 'Напишите комментарий' : 'Напишите что-нибудь...'"
         (input)="onTextAreaInput($event)"
         [(ngModel)]="postText"
     ></textarea>
@@ -18,6 +18,6 @@
     </div>
 
     <div class="send-button btn-icon tt-link" (click)="onCreatePost()">
-        <svg icon="arrow-send" class="svg16"></svg>
+        <svg icon="arrow-send" class="arrow-send svg16"></svg>
     </div>
 }
