@@ -1,3 +1,4 @@
+import { CommentEntity } from "./comment.interface";
 import { Profile } from "./profile.interface";
 
 export interface PostCreateDto {
@@ -18,5 +19,5 @@ export interface Post {
     updatedAt: string;
     likes: number;
     likesUsers: number[];
-    comments: Comment[];
+    comments: CommentEntity[];
 }

@@ -10,3 +10,11 @@ export interface Profile {
     stack: string[];
     city: string;
 }
+
+export interface ProfileDto {
+    id: number;
+    username: string;
+    firstName: string;
+    lastName: string;
+    avatarUrl: string | null;
+}

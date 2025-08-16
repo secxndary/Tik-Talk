@@ -1,6 +1,6 @@
 import { Profile } from "./profile.interface";
 
-export interface Comment {
+export interface CommentEntity {
     id: number;
     text: string;
     author: Profile;
@@ -14,5 +14,5 @@ export interface CommentCreateDto {
     text: string;
     authorId: number;
     postId: number;
-    commentId: number;
+    commentId: number | null;
 }
