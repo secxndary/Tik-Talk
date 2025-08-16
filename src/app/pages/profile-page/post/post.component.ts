@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input, Renderer2, Signal, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, Renderer2, signal } from '@angular/core';
 import { Post } from '../../../data/interfaces/post.interface';
 import { AvatarPlaceholderComponent } from '../../../common-ui/avatar-placeholder/avatar-placeholder.component';
 import { ProfileNamePipe } from '../../../helpers/pipes/profile-name.pipe';
@@ -8,6 +8,8 @@ import { SvgIconComponent } from '../../../common-ui/svg-icon/svg-icon.component
 import { PostService } from '../../../data/services/post.service';
 import { firstValueFrom } from 'rxjs';
 import { ProfileService } from '../../../data/services/profile.service';
+import { PostInputComponent } from "../post-input/post-input.component";
+import { CommentComponent } from './comment/comment.component';
 
 @Component({
     selector: 'app-post',
@@ -16,7 +18,9 @@ import { ProfileService } from '../../../data/services/profile.service';
         ProfileNamePipe,
         RouterLink,
         RelativeDateTimePipe,
-        SvgIconComponent
+        SvgIconComponent,
+        PostInputComponent,
+        CommentComponent
     ],
     templateUrl: './post.component.html',
     styleUrl: './post.component.scss',
@@ -52,7 +56,7 @@ export class PostComponent {
 
     }
 
-    onSettingsButton($event: Event) {
+    onSettingsButton(event: Event) {
         throw new Error('Method not implemented.');
     }
 

@@ -7,11 +7,11 @@
     ></app-avatar-placeholder>
 
     <main class="post-body">
-        <div class="header-and-content">
+        <div class="post__header-and-content">
             <header class="header-row mb8">
                 <div class="name-and-time row-baseline">
                     <p class="regular" id="post-author-name">{{ post.author | profileName }}</p>
-                    <p class="small-text" id="post-created-at">{{ post.createdAt | relativeDateTime }}</p>
+                    <p class="small-text post-created-at">{{ post.createdAt | relativeDateTime }}</p>
                 </div>
 
                 <div class="settings__wrapper centered-container tt-link" (click)="onSettingsButton($event)">
@@ -19,10 +19,10 @@
                 </div>
             </header>
 
-            <div class="post-content small-text mb16">{{ post.content }}</div>
+            <div class="post-content small-text">{{ post.content }}</div>
         </div>
 
-        <div class="likes-and-comments">
+        <div class="post__likes-and-comments">
             <div class="like__wrapper row tt-link" (click)="onLikeButton($event)">
                 <svg icon="like" class="like-btn svg16"></svg>
                 <p class="regular likes-counter">{{ likes() }}</p>

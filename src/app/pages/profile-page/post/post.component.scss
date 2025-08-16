@@ -11,6 +11,12 @@
     margin-bottom: 16px;
 }
 
+.post-body {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
 .header-row {
     display: flex;
     align-items: center;
@@ -31,7 +37,7 @@
     margin-right: 0;
 }
 
-#post-created-at {
+.post-created-at {
     color: var(--light-transparent-color)
 }
 
@@ -46,7 +52,7 @@
     color: var(--light-color);
 }
 
-.likes-and-comments {
+.post__likes-and-comments {
     display: flex;
     align-items: center;
 }
